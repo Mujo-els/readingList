@@ -37,15 +37,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .userDetailsService(new UserDetailsService() {
                     @Override
                     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-                        return readerRepository.findOne(username);
+
+//                        Reader reader = readerRepository.getOne(username);
+                        UserDetails userDetails = readerRepository.getOne(username);
+
+                        if (userDetails != null) {
+
+                            return userDetails;
+
+                        }
+
+                        throw new UsernameNotFoundException("User '" + username + "' not found.");
+
                     }
                 });
     }
 
 
-    public  interface ReaderRepository extends JpaRepository<Reader, String>{
 
-    }
 
 }
 

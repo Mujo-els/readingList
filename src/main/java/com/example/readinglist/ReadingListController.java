@@ -14,11 +14,22 @@ import java.util.List;
 @RequestMapping("/")
 public class ReadingListController {
 
+    @Autowired
+    public Not anot;
+
     private ReadingListRepository readingListRepository;
+
 
     @Autowired
     public ReadingListController(ReadingListRepository readingLIstRepository){
         this.readingListRepository = readingLIstRepository;
+    }
+
+
+    @Autowired
+    public void setOut(){
+        System.out.println("set out\nset out\nset out\nset out\nset out\nset out\n");
+        anot.printThis();
     }
 
     @RequestMapping(value = "/{reader}", method = RequestMethod.GET)
@@ -31,6 +42,8 @@ public class ReadingListController {
         }
      return "readingList";
     }
+
+
 
     @RequestMapping(value = "/{reader}", method = RequestMethod.POST)
     public String addToReadingList(
